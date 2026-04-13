@@ -1,21 +1,21 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
-11,Broken Strings,The Hollow,rock,sad,0.72,140,0.32,0.55,0.14
-12,Golden Hour,Sunset Dial,pop,happy,0.78,116,0.88,0.80,0.20
-13,Deep Roots,Acoustic Atlas,folk,relaxed,0.31,68,0.74,0.45,0.95
-14,Neon Jungle,Circuit Rex,edm,intense,0.96,140,0.62,0.91,0.03
-15,Rainy Seoul,Cafe Hana,lofi,chill,0.33,74,0.55,0.57,0.83
-16,Thunder Protocol,Voltline,rock,intense,0.88,148,0.44,0.64,0.08
-17,Lazy Sunday,The Hammock,folk,relaxed,0.29,64,0.78,0.42,0.97
-18,Electric Feel,Prism Wave,synthwave,moody,0.80,112,0.53,0.76,0.15
-19,Good Vibes Only,Indigo Parade,pop,happy,0.85,120,0.90,0.83,0.12
-20,Solitude,Orbit Bloom,ambient,sad,0.22,55,0.38,0.35,0.94
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,mood_tag,danceability_tag,era_tag
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,87,2020s,euphoric,groovy,modern
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,72,2020s,nostalgic,mellow,modern
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,65,2010s,aggressive,driving,recent
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,68,2020s,nostalgic,mellow,modern
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,91,2020s,euphoric,pumped,modern
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,55,2010s,dreamy,slow,recent
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,60,2010s,nostalgic,smooth,recent
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,78,2020s,melancholic,groovy,modern
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,74,2020s,calm,mellow,modern
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,82,2020s,euphoric,groovy,modern
+11,Broken Strings,The Hollow,rock,sad,0.72,140,0.32,0.55,0.14,58,2010s,melancholic,driving,recent
+12,Golden Hour,Sunset Dial,pop,happy,0.78,116,0.88,0.80,0.20,89,2020s,euphoric,groovy,modern
+13,Deep Roots,Acoustic Atlas,folk,relaxed,0.31,68,0.74,0.45,0.95,52,2010s,nostalgic,slow,recent
+14,Neon Jungle,Circuit Rex,edm,intense,0.96,140,0.62,0.91,0.03,94,2020s,aggressive,pumped,modern
+15,Rainy Seoul,Cafe Hana,lofi,chill,0.33,74,0.55,0.57,0.83,70,2020s,nostalgic,mellow,modern
+16,Thunder Protocol,Voltline,rock,intense,0.88,148,0.44,0.64,0.08,63,2010s,aggressive,driving,recent
+17,Lazy Sunday,The Hammock,folk,relaxed,0.29,64,0.78,0.42,0.97,50,2000s,nostalgic,slow,classic
+18,Electric Feel,Prism Wave,synthwave,moody,0.80,112,0.53,0.76,0.15,76,2020s,melancholic,groovy,modern
+19,Good Vibes Only,Indigo Parade,pop,happy,0.85,120,0.90,0.83,0.12,92,2020s,euphoric,groovy,modern
+20,Solitude,Orbit Bloom,ambient,sad,0.22,55,0.38,0.35,0.94,45,2010s,melancholic,slow,recent

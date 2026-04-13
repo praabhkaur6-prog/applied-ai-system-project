@@ -20,6 +20,11 @@ class Song:
     valence: float
     danceability: float
     acousticness: float
+    popularity: int
+    release_decade: str
+    mood_tag: str
+    danceability_tag: str
+    era_tag: str
 
 
 @dataclass
@@ -81,46 +86,94 @@ def load_songs(csv_path: str) -> List[Dict]:
             row["valence"] = float(row["valence"])
             row["danceability"] = float(row["danceability"])
             row["acousticness"] = float(row["acousticness"])
+            row["popularity"] = int(row["popularity"])
             songs.append(row)
     return songs
 
 
-def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, str]:
-    """Scores a single song against user preferences. Returns a (score, explanation) tuple."""
+def score_song(user_prefs: Dict, song: Dict, mode: str = "balanced") -> Tuple[float, str]:
+    """
+    Scores a single song against user preferences using the selected ranking mode.
+    Modes: 'balanced', 'genre-first', 'mood-first', 'energy-focused'
+    Returns a (score, explanation) tuple.
+    """
     score = 0.0
     reasons = []
 
+    # --- Genre ---
+    genre_weight = 3.0 if mode == "genre-first" else 2.0
     if song["genre"] == user_prefs.get("genre", ""):
-        score += 2.0
-        reasons.append("genre match (+2.0)")
+        score += genre_weight
+        reasons.append(f"genre match (+{genre_weight})")
 
+    # --- Mood ---
+    mood_weight = 3.0 if mode == "mood-first" else 1.0
     if song["mood"] == user_prefs.get("mood", ""):
-        score += 1.0
-        reasons.append("mood match (+1.0)")
+        score += mood_weight
+        reasons.append(f"mood match (+{mood_weight})")
 
+    # --- Mood tag bonus ---
+    if song.get("mood_tag") == user_prefs.get("mood_tag", ""):
+        score += 0.5
+        reasons.append("mood tag match (+0.5)")
+
+    # --- Energy ---
     target_energy = user_prefs.get("energy", 0.5)
     energy_gap = abs(song["energy"] - target_energy)
-    energy_score = round(1.0 - energy_gap, 2)
+    energy_weight = 2.0 if mode == "energy-focused" else 1.0
+    energy_score = round(energy_weight * (1.0 - energy_gap), 2)
     score += energy_score
     reasons.append(f"energy similarity (+{energy_score})")
 
+    # --- Valence bonus ---
     if user_prefs.get("mood") == "happy" and song["valence"] > 0.7:
         score += 0.5
         reasons.append("high valence bonus (+0.5)")
 
+    # --- Acoustic preference ---
     if user_prefs.get("likes_acoustic", False) and song["acousticness"] > 0.6:
         score += 0.5
         reasons.append("acoustic preference (+0.5)")
+
+    # --- Popularity bonus (new attribute) ---
+    if user_prefs.get("prefers_popular", False) and song["popularity"] > 80:
+        score += 0.5
+        reasons.append(f"popularity bonus (+0.5, score={song['popularity']})")
+
+    # --- Era preference (new attribute) ---
+    preferred_era = user_prefs.get("preferred_era", "")
+    if preferred_era and song.get("era_tag") == preferred_era:
+        score += 0.5
+        reasons.append(f"era match ({preferred_era}, +0.5)")
 
     explanation = ", ".join(reasons)
     return round(score, 2), explanation
 
 
-def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
-    """Scores all songs, ranks them, and returns the top k as (song, score, explanation) tuples."""
+def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5, mode: str = "balanced") -> List[Tuple[Dict, float, str]]:
+    """
+    Scores all songs using the selected mode, applies a diversity penalty to avoid
+    repeat artists, and returns the top k as (song, score, explanation) tuples.
+
+    Modes: 'balanced' | 'genre-first' | 'mood-first' | 'energy-focused'
+    """
     scored = []
     for song in songs:
-        score, explanation = score_song(user_prefs, song)
+        score, explanation = score_song(user_prefs, song, mode=mode)
         scored.append((song, score, explanation))
     scored.sort(key=lambda x: x[1], reverse=True)
-    return scored[:k]
+
+    # Diversity penalty: penalize repeat artists
+    results = []
+    seen_artists = set()
+    for song, score, explanation in scored:
+        artist = song["artist"]
+        if artist in seen_artists:
+            score = round(score - 1.0, 2)
+            explanation += ", diversity penalty (-1.0)"
+        else:
+            seen_artists.add(artist)
+        results.append((song, score, explanation))
+
+    results.sort(key=lambda x: x[1], reverse=True)
+    return results[:k]
