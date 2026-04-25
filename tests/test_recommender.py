@@ -1,5 +1,6 @@
 from src.recommender import Song, UserProfile, Recommender
 
+
 def make_small_recommender() -> Recommender:
     songs = [
         Song(
@@ -37,11 +38,14 @@ def test_recommend_returns_songs_sorted_by_score():
         target_energy=0.8,
         likes_acoustic=False,
     )
+
     rec = make_small_recommender()
     results = rec.recommend(user, k=2)
 
+    # ✅ basic checks
     assert len(results) == 2
-    # Starter expectation: the pop, happy, high energy song should score higher
+
+    # ✅ strongest match should be first
     assert results[0].genre == "pop"
     assert results[0].mood == "happy"
 
@@ -53,9 +57,14 @@ def test_explain_recommendation_returns_non_empty_string():
         target_energy=0.8,
         likes_acoustic=False,
     )
+
     rec = make_small_recommender()
     song = rec.songs[0]
 
     explanation = rec.explain_recommendation(user, song)
+
+    # ✅ type check
     assert isinstance(explanation, str)
+
+    # ✅ not empty
     assert explanation.strip() != ""
