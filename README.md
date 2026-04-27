@@ -190,7 +190,7 @@ Adding the retrieval step (RAG) showed how real systems narrow down data before 
 
 ## 🎥 Demo Video
 
-(Add your Loom link here)
+![Loom link ](https://www.loom.com/share/5c628ae5a61f49cf8f9dc055e0a6607e)
 
 ---
 
