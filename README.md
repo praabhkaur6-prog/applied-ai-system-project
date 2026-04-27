@@ -203,6 +203,12 @@ This project demonstrates:
 * Designing modular and testable code
 * Evaluating system reliability and bias
 
+## Portfolio
+
+> This project shows that I approach AI not just as a builder but as someone who thinks about reliability and accountability. I didn't just extend a recommender — I asked how to prove it works, catch it when it fails, and explain its behavior. That mindset, combining analytical thinking with structured testing, is what I bring to data and AI engineering work.
+>
+> 🔗 [GitHub Repository](https://github.com/praabhkaur6-prog/applied-ai-system-project)
+
 ---
 ## 📊 System Architecture
 
